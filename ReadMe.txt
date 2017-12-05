@@ -3,6 +3,7 @@
 http://www.chinanews.com/society.shtml
 当前抓取了2017年11月份所有数据新闻数据，后期进行数据可视化分析
 也可以自己在homework1.py设置要抓取的时间段
+本项目开源地址：https://github.com/sty945/news_spider
 
 运行环境：
 系统:windows
