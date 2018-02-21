@@ -4,6 +4,8 @@ http://www.chinanews.com/society.shtml
 当前抓取了2017年11月份所有数据新闻数据，后期进行数据可视化分析
 也可以自己在homework1.py设置要抓取的时间段
 本项目开源地址：https://github.com/sty945/news_spider
+可视化分析报告：
+https://mp.weixin.qq.com/s/LOEuUQe9rsv87S8KISGHJg
 
 运行环境：
 系统:windows
@@ -53,5 +55,4 @@ news_spider
         11month_view .html    数据可视化展示，基于jupyter notebook 书写保存后的html，建议firefox打开，chrome图表显示有问题
         11result.json        处理后的用json保存的数据提取出来关键词结果
         raw_result.json      处理前的用json保存的数据提取出来关键词结果
-        关于该结果的分析的链接.txt     关于这个数据可视化分析所写的一篇博文
         
