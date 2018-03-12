@@ -1,21 +1,34 @@
-功能：
-以中国新闻网社会新闻板块为抓取对象,通过关键词来分析新闻热点事件
-http://www.chinanews.com/society.shtml
-当前抓取了2017年11月份所有数据新闻数据，后期进行数据可视化分析
-也可以自己在homework1.py设置要抓取的时间段
+## 当前功能：
+
+以中国新闻网社会新闻板块为抓取对象,通过关键词来分析新闻热点事件:
+[中国新闻网链接](http://www.chinanews.com/society.shtml)
+
+当前代码中设置的是抓取2017年11月份所有数据新闻数据，后期进行数据可视化分析，用户也可以自己在homework1.py设置要抓取的时间段
+
 本项目开源地址：https://github.com/sty945/news_spider
+
 结果展示：https://github.com/sty945/news_spider/blob/master/result/news_spider_vision.ipynb
+
 可视化分析报告：
 https://mp.weixin.qq.com/s/LOEuUQe9rsv87S8KISGHJg
 
-运行环境：
+## 预期实现功能
+建立一整套从新闻信息挖掘到分析以及可视化展现的完整体系，
+使用户能够很好的关注整个当前的新闻热点以及这些热点的起始、 经过、 发展和消逝的整个过程。
+
+## 运行环境：
 系统:windows
+
 python版本：python 3.6.3
+
 数据库:mongoDB 3.4.9
+
 分词系统：中科院ictclas分词系统 地址：https://github.com/sty945/NLPIR
+
 分词系统文件转json地址: http://tools.jb51.net/code/excel_col2json
 
-
+## 目录下文件功能解释
+```
 news_spider
 │  readme.txt
 │  
@@ -57,4 +70,4 @@ news_spider
         11result.json        处理后的用json保存的数据提取出来关键词结果
         raw_result.json      处理前的用json保存的数据提取出来关键词结果
         news_spider_vision.ipynb jupyter note格式的结果展示
-        
+```     
