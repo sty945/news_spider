@@ -1,3 +1,7 @@
+## 基于新闻媒体的热点新闻数据可视化分析
+欢迎对数据可视化、数据挖掘的同学一起完成这个项目。
+**welcome to fork**
+
 ## 当前功能：
 
 以中国新闻网社会新闻板块为抓取对象,通过关键词来分析新闻热点事件:
@@ -5,12 +9,11 @@
 
 当前代码中设置的是抓取2017年11月份所有数据新闻数据，后期进行数据可视化分析，用户也可以自己在homework1.py设置要抓取的时间段
 
-本项目开源地址：https://github.com/sty945/news_spider
+[本项目开源地址](https://github.com/sty945/news_spider)
 
-结果展示：https://github.com/sty945/news_spider/blob/master/result/news_spider_vision.ipynb
+[当前结果展示](https://github.com/sty945/news_spider/blob/master/result/news_spider_vision.ipynb)
 
-可视化分析报告：
-https://mp.weixin.qq.com/s/LOEuUQe9rsv87S8KISGHJg
+[可视化分析报告](https://mp.weixin.qq.com/s/LOEuUQe9rsv87S8KISGHJg)
 
 ## 预期实现功能
 建立一整套从新闻信息挖掘到分析以及可视化展现的完整体系，
