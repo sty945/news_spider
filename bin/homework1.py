@@ -21,7 +21,6 @@ item_info = news['item_info']
 # 网页连接URL
 url_lists = news['url_lists']
 
-
 def get_day_list():
     '''
     得到设置时间段内的所有时间日期
