@@ -43,7 +43,7 @@ def get_sogou_single_links(url, db):
         wb_data.encoding = wb_data.apparent_encoding
         soup = BeautifulSoup(wb_data.text, 'lxml')
         contents = soup.select('.pub-list > li > .s2')
-        # print(contents)
+        print(contents)
         for content in contents:
             print(content.find('href'))
         #     data = {
