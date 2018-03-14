@@ -53,6 +53,7 @@ def get_sogou_single_links(url, db):
         #     }
         #     print(data)
             # db.insert_one(data)
+
     except:
         print("error")
 
