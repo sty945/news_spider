@@ -21,6 +21,7 @@ item_info = news['item_info']
 # 网页连接URL
 url_lists = news['url_lists']
 
+
 def get_day_list():
     '''
     得到设置时间段内的所有时间日期
@@ -38,6 +39,7 @@ def get_day_list():
         datestart += datetime.timedelta(days=1)
         daylist.append(datestart.strftime('%m%d'))
     return daylist
+
 
 def get_single_links(url):
     '''
@@ -58,6 +60,7 @@ def get_single_links(url):
     except:
         print("error")
 
+
 def get_all_links():
     '''
     通过之前的时间段数据得到该时间段对应当天页面，然后通过get_single_links得到该页面下的所有链接，
@@ -73,6 +76,7 @@ def get_all_links():
         time.sleep(0.5)
         get_single_links(url)
         print("current database count:" + str(url_lists.count()))
+
 
 def get_res(url):
     '''
