@@ -57,7 +57,6 @@ def get_sogou_single_links(url, db):
         print("error")
 
 
-
 def get_sogou_links():
     current_time = datetime.now().strftime('%Y-%m-%d-%H')
     current_day = datetime.now().strftime('%Y-%m-%d')
