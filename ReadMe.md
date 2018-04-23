@@ -35,6 +35,11 @@
 [360趋势](https://trends.so.com/)
 
 
+## 相关参考文档
+[pyLDA系列︱考量时间因素的动态主题模型（Dynamic Topic Models](https://blog.csdn.net/sinat_26917383/article/details/79377761)
+[LDA(Latent Dirichlet Allocation)主题模型] (https://blog.csdn.net/aws3217150/article/details/53840029)
+
+
 ## 运行环境：
 系统:windows
 
