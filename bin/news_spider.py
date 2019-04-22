@@ -41,6 +41,11 @@ def get_day_list(start='2018-01-01', end='2018-12-31'):
     return daylist
 
 def get_single_links(url, web_site='http://www.chinanews.com'):
+    """
+    :param url:需要抓取的网页
+    :param web_site: 主站点
+    :return:
+    """
     try:
         # 加入代理头
         headers = {'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Mobile Safari/537.36'}
@@ -69,12 +74,22 @@ def get_single_links(url, web_site='http://www.chinanews.com'):
         print("get_single_links error")
 
 def get_all_links(urls):
+    """
+    :param urls:列表页的集合
+    :return:
+    """
     for url in urls:
         time.sleep(0.3)
         get_single_links(url)
         print("current database count:" + str(url_lists.count()))
 
 def get_link_article(url,is_deal_badcase=False):
+    """
+    抓取网页内容函数
+    :param url: 网址
+    :param is_deal_badcase:是否是之前抓取失败了
+    :return:
+    """
     try:
         if not is_deal_badcase:
             lock.acquire()
@@ -112,6 +127,10 @@ def get_link_article(url,is_deal_badcase=False):
         print("get_link_article error")
 
 def all_links_from_db():
+    """
+    获取数据库中数据
+    :return:
+    """
     all_links = []
     for data in url_lists.find():
         all_links.append(data['link'])
@@ -122,6 +141,10 @@ def init(l):
 	lock = l
 
 def deal_failed_url():
+    """
+    处理为爬取成功的数据
+    :return:
+    """
     all_links = []
     for data in badcase_url_lists.find():
         all_links.append(data['link'])
@@ -131,7 +154,7 @@ def deal_failed_url():
 if __name__ == '__main__':
     # 设置获取数据的时间区间
     day_lists = get_day_list('2019-02-28', '2019-3-31')
-    # 得到在约定时间区间之中的
+    # 得到在约定时间区间之中的列表页集合
     urls = ['http://www.chinanews.com/scroll-news/2019/{}/news.shtml'.format(day) for day in day_lists]
     get_all_links(urls)
     lock = Lock()
