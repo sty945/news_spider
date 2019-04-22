@@ -11,7 +11,6 @@
 import requests
 from bs4 import BeautifulSoup
 import time
-import re
 import pymongo
 import datetime
 from newspaper import Article
@@ -69,35 +68,6 @@ def get_single_links(url, web_site='http://www.chinanews.com'):
     except:
         print("get_single_links error")
 
-
-def get_single_links_regrex(url):
-    try:
-        # 加入代理头
-        headers = {'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Mobile Safari/537.36'}
-        wb_data = requests.get(url, headers=headers)
-        wb_data.encoding = wb_data.apparent_encoding
-        soup = BeautifulSoup(wb_data.text, 'lxml')
-        # print(soup)
-        # 取出网页链接的正则
-        link_ptn = r"url\S*source"
-        single_links = re.findall(link_ptn, soup.text)
-        for link in single_links:
-            # 网页链接结果处理操作
-            link = link.replace('url":"', '')
-            link = link.replace('","source', '')
-            link = link.replace('\\', '')
-            # all_links.append(link)
-            data = {
-                "link": link,
-                "year": link.split('/')[-3],
-                "month": link.split('/')[-2].split('-')[0],
-                "day": link.split('/')[-2].split('-')[1]
-            }
-            url_lists.insert_one(data)
-    except:
-        print("get_single_links_regrex error")
-
-
 def get_all_links(urls):
     for url in urls:
         time.sleep(0.3)
@@ -140,38 +110,6 @@ def get_link_article(url,is_deal_badcase=False):
         if badcase_url_lists.find(badcase_data).count() == 0:
             badcase_url_lists.insert_one(badcase_data)
         print("get_link_article error")
-
-def get_link_info(url):
-    '''
-    从单个新闻的链接中得到这个链接中的新闻内容
-    :param url: 单个新闻的链接
-    :return:
-    '''
-    try:
-        contentTxt = ""
-        wb_data = requests.get(url)
-        wb_data.encoding = wb_data.apparent_encoding
-        print(wb_data.apparent_encoding)
-        soup = BeautifulSoup(wb_data.text, 'lxml')
-        contents = soup.select('.left_zw > p')
-        for content in contents:
-            contentTxt += content.get_text().strip()
-        # print(''.join(contentTxt.encode('utf8').decode('utf8').split('')))
-        # print(''.join(contentTxt))
-        contentTxt = contentTxt.encode('utf-8').decode('utf-8')
-        data = {
-            "link": url,
-            "content": contentTxt,
-            "date":{
-                "year": url.split('/')[-3],
-                "month": url.split('/')[-2].split('-')[0],
-                "day": url.split('/')[-2].split('-')[1]
-            }
-        }
-        item_info.insert_one(data)
-        print(data)
-    except:
-        print("get_link_info error")
 
 def all_links_from_db():
     all_links = []
