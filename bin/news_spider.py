@@ -35,9 +35,9 @@ def get_day_list(start='2018-01-01', end='2018-12-31'):
     # 将日期格式化
     datestart = datetime.datetime.strptime(start, '%Y-%m-%d')
     dateend = datetime.datetime.strptime(end, '%Y-%m-%d')
-    while datestart < dateend:
-        datestart += datetime.timedelta(days=1)
+    while datestart <= dateend:
         daylist.append(datestart.strftime('%m%d'))
+        datestart += datetime.timedelta(days=1)
     return daylist
 
 def get_single_links(url, web_site='http://www.chinanews.com'):
@@ -153,7 +153,7 @@ def deal_failed_url():
 
 if __name__ == '__main__':
     # 设置获取数据的时间区间
-    day_lists = get_day_list('2019-02-28', '2019-3-31')
+    day_lists = get_day_list('2019-03-01', '2019-3-31')
     # 得到在约定时间区间之中的列表页集合
     urls = ['http://www.chinanews.com/scroll-news/2019/{}/news.shtml'.format(day) for day in day_lists]
     get_all_links(urls)
