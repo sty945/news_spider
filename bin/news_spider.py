@@ -20,8 +20,9 @@ client = pymongo.MongoClient('localhost', 27017)
 news = client['chinanews']
 # 页面详细信息表
 item_info = news['item_info']
-# 网页连接URL
+# 网页链接URL
 url_lists = news['url_lists']
+# 爬取失败网页链接URL
 badcase_url_lists = news['badcase_url_lists']
 
 
@@ -49,16 +50,24 @@ def get_single_links(url, web_site='http://www.chinanews.com'):
     try:
         # 加入代理头
         headers = {'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Mobile Safari/537.36'}
+        # 获取网页数据
         wb_data = requests.get(url, headers=headers)
+        # 指定网页编码
         wb_data.encoding = wb_data.apparent_encoding
+        # 解析网页
         soup = BeautifulSoup(wb_data.text, 'lxml')
+        # 通过css selector获取网页链接所在的元素块
         links = soup.select('div.dd_bt > a')
+        # 遍历元素块列表
         for link in links:
+            # 获取网页
             link = link.get('href')
+            # 获取该网页对应的时间信息
             url_arr = url.split('/')
             year = url_arr[-3]
             month = url_arr[-2][:2]
             day = url_arr[-2][2:]
+            # 为不包含网页域名的网址加上网页域名
             if web_site not in link:
                 res_link = web_site + link
             data = {
@@ -69,6 +78,7 @@ def get_single_links(url, web_site='http://www.chinanews.com'):
                     "day": day
                 }
             }
+            # 将数据存储到数据库
             url_lists.insert_one(data)
     except:
         print("get_single_links error")
@@ -79,6 +89,7 @@ def get_all_links(urls):
     :return:
     """
     for url in urls:
+        # 为了防止反爬虫，睡眠0.3s
         time.sleep(0.3)
         get_single_links(url)
         print("current database count:" + str(url_lists.count()))
@@ -91,11 +102,13 @@ def get_link_article(url,is_deal_badcase=False):
     :return:
     """
     try:
+        # 如果是处理badcase_url则不加锁
         if not is_deal_badcase:
             lock.acquire()
         article = Article(url, language='zh')  # Chinese
         # 网页下载
         article.download()
+        # 如果是处理badcase_url则不加锁
         if not is_deal_badcase:
             lock.release()
         # 网页解析
@@ -104,6 +117,7 @@ def get_link_article(url,is_deal_badcase=False):
         text = article.text.strip()
         # 替换换行符
         text = text.replace('\n\n', '')
+        # 构造data数据形式
         data = {
             "link": url,
             "content": text,
@@ -113,6 +127,7 @@ def get_link_article(url,is_deal_badcase=False):
                 "day": url.split('/')[-2].split('-')[1]
             }
         }
+        # 在item_info表中插入数据
         item_info.insert_one(data)
         print(data)
         if badcase_url_lists.find({"link":url}).count() > 0:
@@ -157,9 +172,12 @@ if __name__ == '__main__':
     # 得到在约定时间区间之中的列表页集合
     urls = ['http://www.chinanews.com/scroll-news/2019/{}/news.shtml'.format(day) for day in day_lists]
     get_all_links(urls)
+    # 加锁
     lock = Lock()
+    # 创建进程池
     pool = Pool(3, initializer=init, initargs=(lock,))  # 创建多线程池
     pool.map(get_link_article, all_links_from_db())
+    # 回收进程池
     pool.close()
     pool.join()
 
