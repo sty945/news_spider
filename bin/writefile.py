@@ -12,6 +12,7 @@ def write_context(file_name, month_name='01'):
             month = data["date"]["month"]
             if month_name in month:
                 content = data["content"]
+                content += '\r\n'
                 file.write(content)
         except:
             num += 1
