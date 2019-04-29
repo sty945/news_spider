@@ -58,42 +58,20 @@ python版本：python 3.6.3
 news_spider
 │  readme.txt
 │  
-├─bin
+├─bin  程序文件
 │  │  countDatabase.py     在数据抓取过程中统计数据库中数据数量
 │  │  deal_network_failed.py    解决抓取过程中，网络掉线或者其他中断情况的断点续传功能
-│  │  homework1.py    爬虫主程序
-│  │  main.py   运行主程序
-│  │  splitfile.py   将很大的txt文件分割成若干个指定大小的小txt文件
 │  │  writefile.py   将数据库中所有的新闻数据写入到txt文本中
-│  │  
-│  └─__pycache__    缓存文件
-│          homework1.cpython-36.pyc
+│  │  news_spider.py  爬虫主程序
 │          
-├─contents
-│  │  11content.txt   2017年11月份的结果数据文本
-│  │  
-│  └─11content       2017年11月份的结果数据文本（分割后的小文件）
-│          0.txt
-│          1.txt
-│          10.txt
-│          11.txt
-│          12.txt
-│          13.txt
-│          14.txt
-│          15.txt
-│          16.txt
-│          2.txt
-│          3.txt
-│          4.txt
-│          5.txt
-│          6.txt
-│          7.txt
-│          8.txt
-│          9.txt
+├─contents 文本资源
+│  │  03_content.txt   2017年11月份的结果数据文本
 │          
 └─result      结果存放
         11month_view .html    数据可视化展示，基于jupyter notebook 书写保存后的html，建议firefox打开，chrome图表显示有问题
         11result.json        处理后的用json保存的数据提取出来关键词结果
         raw_result.json      处理前的用json保存的数据提取出来关键词结果
-        news_spider_vision.ipynb jupyter note格式的结果展示
+        news_spider_vision.ipynb  jupyter note格式的结果展示
+        Locators_table_cheat_sheet.pdf  css selector资源
+        stop_words*   停用词典
 ```     
